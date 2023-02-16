@@ -1,0 +1,56 @@
+{% load i18n thumbnail %}
+
+    {% if not ad %}
+    {% else %}
+    <script>
+        function getCookie(cname) {
+            let name = cname + "=";
+            let ca = document.cookie.split(';');
+            for(let i = 0; i < ca.length; i++) {
+              let c = ca[i];
+              while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+              }
+              if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+              }
+            }
+            return "";
+          }
+
+        function setCookie(cname, cvalue, expires_in_minutes) {
+            if (getCookie("ads-manager-sleep"))
+                return;
+
+            var maxAgeSegment = "; max-age=" + expires_in_minutes*60;
+            document.cookie = encodeURI(cname) + "=" + encodeURI(cvalue) + maxAgeSegment;
+        }
+
+        setCookie("ads-manager-sleep", "1", {{ad.sleep_time_minutes}});
+    </script>
+    <div class="ads-manager-box card mt-2 mb-2 p-3" id="ads-manager-box">
+        {% if ad.image %}
+            {% thumbnail ad.image "x500" crop="center" as im %}
+            <div class="text-center ads-manager-image-box">
+                <a {% if ad.open_new_window %}target="_blank" {% endif %} href="{{link}}"><img class="m-2 img-fluid ads-manager-image" src="{{ im.url }}"></a>
+            </div>
+            {% endthumbnail %}
+        {% endif %}
+        {% if ad.show_link_text %}
+        <div class="text-center ads-manager-link-box">
+            <a class="ads-manager-link" {% if ad.open_new_window %}target="_blank" {% endif %} href="{{link}}">{{ad.link_text}}</a><br>
+            <div class="text-center muted m-2">
+                <div onclick="dismissAd()">Dismiss / Hide</div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+    function dismissAd() {
+        var x = document.getElementById("ads-manager-box");
+        x.style.display = "none";
+      }
+    </script>
+
+    {% endif %}

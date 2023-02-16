@@ -1,0 +1,47 @@
+{% load static %}
+{% load ads_tags %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <title>Ads manager Demo Template</title>
+    <style>
+      {% block extra_style %}
+      {% endblock %}
+    </style>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body>
+    <div class="container">
+      {% get_random_add %}
+      {% block content %}
+      {% endblock %}      
+      <div class="text-center">
+        <a href="/admin/adsmanager/">Go to the admin to view the changes</a>
+      </div>      
+    </div>
+
+    <footer class="footer pt-2 mt-2">
+      <hr class="horizontal dark mb-2">
+      <div class="container">
+        <div class="text-center">
+          <p class="my-4 text-sm">
+            Coding by Thomas Weholt <br> thomas@weholt.org / weholt.org<br>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
